@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isRushing;
     private bool isMoving;
+    private bool isAtacking;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,6 +31,8 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
         anim.SetBool("Rush", isRushing);
         anim.SetBool("Move", isMoving);
+        anim.SetBool("Attack", isAtacking);
+        
     }
     void FixedUpdate()
     {
@@ -75,13 +78,13 @@ public class PlayerController : MonoBehaviour
         }
 
         //jump
-        if (grounded && Input.GetKeyDown(KeyCode.Space))
+        if (grounded && Input.GetKeyDown(KeyCode.W))
         {
             isJumping = true;
             jumpTimeCounter = jumpTime;
             rb.AddForce(Vector2.up * jumpforce);
         }
-        if (Input.GetKey(KeyCode.Space) && isJumping == true)
+        if (Input.GetKey(KeyCode.W) && isJumping == true)
         {
             if (jumpTimeCounter > 0)
             {
@@ -93,9 +96,19 @@ public class PlayerController : MonoBehaviour
                 isJumping = false;
             }
         }
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.W))
         {
             isJumping = false;
+        }
+
+        //attack
+        if(Input.GetKey(KeyCode.G))
+        {
+            isAtacking = true;
+        }
+        else
+        {
+            isAtacking = false;
         }
     }
 
