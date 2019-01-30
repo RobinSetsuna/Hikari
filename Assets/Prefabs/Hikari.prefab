@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4199968431921472}
   - component: {fileID: 61220042142016004}
+  - component: {fileID: 114573758104751616}
   m_Layer: 0
   m_Name: Foot
   m_TagString: Untagged
@@ -131,7 +132,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.040271282, y: -0.49333572}
+  m_Offset: {x: 0.040271282, y: -0.50784}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -142,7 +143,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.24826908, y: 0.23084164}
+  m_Size: {x: 0.24826908, y: 0.25985014}
   m_EdgeRadius: 0
 --- !u!95 &95456743280713342
 Animator:
@@ -173,10 +174,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabd6f965e6216846af576ab2d4103fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 4.8
-  jumpforce: 5
-  maxSpeed: 0.5
-  maxJumpSpeed: 0.7
+  force: 6
+  rushForce: 15
+  jumpforce: 23
+  maxSpeed: 2.5
+  grounded: 0
+  isJumping: 0
+  jumpTime: 0.35
+--- !u!114 &114573758104751616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1028693139135182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 502403455746b544bb6827e735fe6d38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212561257758949526
 SpriteRenderer:
   m_ObjectHideFlags: 1

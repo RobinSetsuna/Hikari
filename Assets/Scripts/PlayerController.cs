@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
 
     [SerializeField] private float force = 4.1f;
+    [SerializeField] private float rushForce = 6f;
     [SerializeField] private float jumpforce = 1f;
     [SerializeField] private float maxSpeed = 0.7f;
 
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
     public float jumpTime;
     private float jumpTimeCounter;
 
+    private bool isRushing;
+    private bool isMoving;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -24,8 +27,9 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        anim.SetFloat("Speed", Mathf.Abs(Input.GetAxis("Horizontal")));
-        
+        anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+        anim.SetBool("Rush", isRushing);
+        anim.SetBool("Move", isMoving);
     }
     void FixedUpdate()
     {
@@ -43,7 +47,24 @@ public class PlayerController : MonoBehaviour
         Vector2 movement = new Vector2(moveHorizontal, 0);
 
         //move
-        rb.AddForce(movement * force);
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            isRushing = true;
+            rb.AddForce(movement * rushForce);
+        }
+        else
+        {
+            isRushing = false;
+            rb.AddForce(movement * force);
+        }
+
+        if (moveHorizontal != 0)
+        {
+            isMoving = true;
+        }
+        else
+            isMoving = false;
+        
         if (rb.velocity.x > maxSpeed)
         {
             rb.velocity = new Vector2(maxSpeed, rb.velocity.y);
