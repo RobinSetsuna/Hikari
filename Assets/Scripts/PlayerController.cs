@@ -56,15 +56,11 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, maxJumpSpeed);
             
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (grounded & Input.GetKeyDown(KeyCode.W))
         {
 
             rb.AddForce(Vector2.up * jumpforce);
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-    }
 }
