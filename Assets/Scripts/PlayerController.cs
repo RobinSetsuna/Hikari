@@ -7,12 +7,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float force = 4.1f;
     [SerializeField] private float jumpforce = 1f;
     [SerializeField] private float maxSpeed = 0.7f;
-    [SerializeField] private float maxJumpSpeed = 0.7f;
 
     private Rigidbody2D rb;
     private Animator anim;
     private Transform characterLocation;
     public bool grounded;
+
+    public bool isJumping;
+    public float jumpTime;
+    private float jumpTimeCounter;
 
     void Start()
     {
@@ -22,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         anim.SetFloat("Speed", Mathf.Abs(Input.GetAxis("Horizontal")));
+        
     }
     void FixedUpdate()
     {
@@ -40,7 +44,6 @@ public class PlayerController : MonoBehaviour
 
         //move
         rb.AddForce(movement * force);
-        //move check
         if (rb.velocity.x > maxSpeed)
         {
             rb.velocity = new Vector2(maxSpeed, rb.velocity.y);
@@ -50,16 +53,28 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(-maxSpeed, rb.velocity.y);
         }
 
-
-        if (rb.velocity.y > maxJumpSpeed)
+        //jump
+        if (grounded && Input.GetKeyDown(KeyCode.Space))
         {
-            rb.velocity = new Vector2(rb.velocity.x, maxJumpSpeed);
-            
-        }
-        if (grounded & Input.GetKeyDown(KeyCode.W))
-        {
-
+            isJumping = true;
+            jumpTimeCounter = jumpTime;
             rb.AddForce(Vector2.up * jumpforce);
+        }
+        if (Input.GetKey(KeyCode.Space) && isJumping == true)
+        {
+            if (jumpTimeCounter > 0)
+            {
+                rb.AddForce(Vector2.up * jumpforce);
+                jumpTimeCounter -= Time.deltaTime;
+            }
+            else
+            {
+                isJumping = false;
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            isJumping = false;
         }
     }
 
