@@ -597,7 +597,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35ed1558721309641bb61269b5bb585d, type: 3}
   m_Name: 
@@ -1231,11 +1231,6 @@ Prefab:
     - target: {fileID: 4373679755056760, guid: 6deae9279eb931a46998affa44c89814, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 50578539472425622, guid: 6deae9279eb931a46998affa44c89814,
-        type: 2}
-      propertyPath: m_LinearDrag
-      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6deae9279eb931a46998affa44c89814, type: 2}

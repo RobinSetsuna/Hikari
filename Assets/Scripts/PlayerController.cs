@@ -17,6 +17,10 @@ public class PlayerController : MonoBehaviour
     public bool isJumping;
     public float jumpTime;
     private float jumpTimeCounter;
+    private float elapsedTime;
+    public float Hold;
+    private float velocity_marker;
+    private bool isVelocityWritten;
 
     private bool isRushing;
     private bool isMoving;
@@ -82,23 +86,37 @@ public class PlayerController : MonoBehaviour
         {
             isJumping = true;
             jumpTimeCounter = jumpTime;
+            elapsedTime = 0;
+            isVelocityWritten = false;
             rb.AddForce(Vector2.up * jumpforce);
         }
         if (Input.GetKey(KeyCode.W) && isJumping == true)
         {
             if (jumpTimeCounter > 0)
             {
-                rb.AddForce(Vector2.up * jumpforce);
+                if (elapsedTime > Hold)
+                {
+                    if(isVelocityWritten == false)
+                    {
+                        velocity_marker = rb.velocity.y;
+                        isVelocityWritten = true;
+                    }
+                    rb.velocity = new Vector2(rb.velocity.x, velocity_marker);
+                }
+                    
                 jumpTimeCounter -= Time.deltaTime;
+                elapsedTime += Time.deltaTime;
             }
             else
             {
                 isJumping = false;
+                elapsedTime = 0;
             }
         }
         if (Input.GetKeyUp(KeyCode.W))
         {
             isJumping = false;
+            elapsedTime = 0;
         }
 
         //attack
