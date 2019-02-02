@@ -597,7 +597,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35ed1558721309641bb61269b5bb585d, type: 3}
   m_Name: 
@@ -1831,6 +1831,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4103759367938166, guid: abbec83fe3b3cd943b15f3f0ee1d6ec4,
     type: 2}
   m_PrefabInternal: {fileID: 1869767738}
+--- !u!1 &1720214512 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1762500506202816, guid: 45a1712222b3dc54f94615fffc89f520,
+    type: 2}
+  m_PrefabInternal: {fileID: 308437671}
+--- !u!122 &1720214515
+Halo:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1720214512}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4286737203
+  m_Size: 5
 --- !u!4 &1739890739 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4103759367938166, guid: abbec83fe3b3cd943b15f3f0ee1d6ec4,

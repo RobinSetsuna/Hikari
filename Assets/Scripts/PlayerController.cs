@@ -36,53 +36,17 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("Rush", isRushing);
         anim.SetBool("Move", isMoving);
         anim.SetBool("Attack", isAtacking);
+
+
+
+       
+
         
-    }
-    void FixedUpdate()
-    {
-        characterLocation = rb.transform;
 
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+       
 
-        //control rotation
-        if (moveHorizontal < 0)
-            gameObject.transform.rotation = new Quaternion(0, 180, 0, 0);
-        else if(moveHorizontal > 0)
-            gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
-
-        Vector2 movement = new Vector2(moveHorizontal, 0);
-
-        //move
-        if(Input.GetKey(KeyCode.LeftShift))
-        {
-            isRushing = true;
-            rb.AddForce(movement * rushForce);
-        }
-        else
-        {
-            isRushing = false;
-            rb.AddForce(movement * force);
-        }
-
-        if (moveHorizontal != 0)
-        {
-            isMoving = true;
-        }
-        else
-            isMoving = false;
-        
-        if (rb.velocity.x > maxSpeed)
-        {
-            rb.velocity = new Vector2(maxSpeed, rb.velocity.y);
-        }
-        if (rb.velocity.x < -maxSpeed)
-        {
-            rb.velocity = new Vector2(-maxSpeed, rb.velocity.y);
-        }
-
-        //jump
-        if (grounded && Input.GetKeyDown(KeyCode.W))
+        //jump       
+        if (grounded && Input.GetButtonDown("Jump"))
         {
             isJumping = true;
             jumpTimeCounter = jumpTime;
@@ -90,20 +54,20 @@ public class PlayerController : MonoBehaviour
             isVelocityWritten = false;
             rb.AddForce(Vector2.up * jumpforce);
         }
-        if (Input.GetKey(KeyCode.W) && isJumping == true)
+        if (Input.GetButton("Jump") && isJumping == true)
         {
             if (jumpTimeCounter > 0)
             {
                 if (elapsedTime > Hold)
                 {
-                    if(isVelocityWritten == false)
+                    if (isVelocityWritten == false)
                     {
                         velocity_marker = rb.velocity.y;
                         isVelocityWritten = true;
                     }
                     rb.velocity = new Vector2(rb.velocity.x, velocity_marker);
                 }
-                    
+
                 jumpTimeCounter -= Time.deltaTime;
                 elapsedTime += Time.deltaTime;
             }
@@ -113,20 +77,61 @@ public class PlayerController : MonoBehaviour
                 elapsedTime = 0;
             }
         }
-        if (Input.GetKeyUp(KeyCode.W))
+        if (Input.GetButtonUp("Jump"))
         {
             isJumping = false;
             elapsedTime = 0;
         }
 
         //attack
-        if(Input.GetKey(KeyCode.G))
+        if (Input.GetButtonDown("Attack"))
         {
             isAtacking = true;
         }
         else
         {
             isAtacking = false;
+        }
+    }
+    void FixedUpdate()
+    {
+        characterLocation = rb.transform;
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+
+        //control rotation
+        if (moveHorizontal < 0)
+            gameObject.transform.rotation = new Quaternion(0, 180, 0, 0);
+        else if (moveHorizontal > 0)
+            gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+
+        Vector2 movement = new Vector2(moveHorizontal, 0);
+
+        //move 
+        if (Mathf.Abs(moveHorizontal) == 1)
+        {
+            isRushing = true;
+            isMoving = false;
+            rb.AddForce(movement * rushForce);
+        }
+        else if (Mathf.Abs(moveHorizontal) == 0)
+        {
+            isMoving = false;
+            isRushing = false;
+        }
+        else
+        {
+            isRushing = false;
+            isMoving = true;
+            rb.AddForce(movement * force);
+        }
+        if (rb.velocity.x > maxSpeed)
+        {
+            rb.velocity = new Vector2(maxSpeed, rb.velocity.y);
+        }
+        if (rb.velocity.x < -maxSpeed)
+        {
+            rb.velocity = new Vector2(-maxSpeed, rb.velocity.y);
         }
     }
 
