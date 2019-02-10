@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 95456743280713342}
   m_Layer: 0
   m_Name: Hikari
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1562424265168710}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.808, y: 0.218, z: 0}
+  m_LocalPosition: {x: 1.5740904, y: -2.2545686, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4199968431921472}
@@ -178,7 +178,7 @@ MonoBehaviour:
   rushForce: 20
   jumpforce: 250
   maxSpeed: 2.7
-  grounded: 0
+  grounded: 1
   isJumping: 0
   jumpTime: 0.3
   Hold: 0.05
@@ -228,7 +228,7 @@ SpriteRenderer:
   m_SortingLayerID: 1652474433
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 8bae57c8f7cfe5640a75b58ea8b0333f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8315115cfba373240a2144062c317c5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
