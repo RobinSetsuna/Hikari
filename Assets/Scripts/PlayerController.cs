@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
                 elapsedTime = 0;
                 isVelocityWritten = false;
                 rb.AddForce(Vector2.up * jumpforce);
+                AudioManager.Instance.PlaySoundEffect("Jump", pitch:false);
             }
             if (Input.GetButton("Jump") && isJumping == true)
             {
@@ -192,15 +193,23 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Get Key");
             HasKey = true;
-            collision.gameObject.SetActive(false);
+            AudioManager.Instance.PlaySoundEffect("Key");
+            collision.gameObject.SetActive(false);      
         }
         if(collision.name == "Door")
         {
             if(HasKey == true)
             {
                 Vector3 pos = GameObject.Find("Point").transform.position;
+                AudioManager.Instance.PlaySoundEffect("OpenDoor");
                 collision.gameObject.transform.RotateAround(pos, new Vector3(0, 0, 1), 90);
             }
+        }
+        if(collision.name == "HikariBlade")
+        {
+           
+            AudioManager.Instance.PlaySoundEffect("Win");
+
         }
     }
 }

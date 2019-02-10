@@ -21,6 +21,7 @@ public class HitFromBottom : MonoBehaviour {
             {
                 if (isBumped == false)
                 {
+                    AudioManager.Instance.PlaySoundEffect("MovePlatform");
                     StartCoroutine(MoveToPosition(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + offset, 0), duration));
                     isBumped = true;
                 }
