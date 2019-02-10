@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Mirror : MonoBehaviour {
     public int id;
+    private int direction;
 	// Use this for initialization
 	void Start () {
-		
-	}
+        direction = -1;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        if (direction == 1)
+            gameObject.transform.Translate(Vector3.right * Time.deltaTime * 4.25f);
+        else if(direction == 0)
+            gameObject.transform.Translate(Vector3.left * Time.deltaTime * 4.25f);
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -41,12 +45,8 @@ public class Mirror : MonoBehaviour {
                 }
             }
         }
+       
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.transform.name == "Moveable_Rock_3")
-        {
-            gameObject.transform.parent = collision.gameObject.transform;
-        }
-    }
+
+   
 }

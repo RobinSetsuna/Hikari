@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private bool isAtacking;
     private bool IsControlling;
     private bool isVelocityWritten;
+    private bool HasKey;
 
     private float velocity_marker;
     private float jumpTimeCounter;
@@ -183,5 +184,23 @@ public class PlayerController : MonoBehaviour
     public void SetControlling()
     {
         IsControlling = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.name == "Key")
+        {
+            Debug.Log("Get Key");
+            HasKey = true;
+            collision.gameObject.SetActive(false);
+        }
+        if(collision.name == "Door")
+        {
+            if(HasKey == true)
+            {
+                Vector3 pos = GameObject.Find("Point").transform.position;
+                collision.gameObject.transform.RotateAround(pos, new Vector3(0, 0, 1), 90);
+            }
+        }
     }
 }
